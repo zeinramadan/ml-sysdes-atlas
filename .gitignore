@@ -1,0 +1,18 @@
+# secrets
+.env
+
+# OS junk
+.DS_Store
+
+# Python cache
+__pycache__/
+*.pyc
+
+# local scrape caches / intermediates
+sources/
+sources_text/
+extracted.json
+
+# optional: local artifacts if you don't want them in git
+flashnotes.md
+case_studies.json

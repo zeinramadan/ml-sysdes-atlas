@@ -13,7 +13,7 @@ This project was created using the case study list from:
 - System components with responsibilities
 - A local UI for exploring and matching similar systems
 
-## How to run the UI
+## How to run the UI (local)
 
 From the repo root:
 
@@ -24,7 +24,22 @@ python -m http.server 8000 --directory /Users/zein/system-design
 Open:
 
 ```
-http://localhost:8000/ui/
+http://localhost:8000/docs/
+```
+
+## How to deploy (GitHub Pages)
+
+GitHub Pages supports either the repo root or `/docs`. This project uses `/docs`.
+
+1) Push to GitHub
+2) Repo Settings → Pages
+3) Source: `main`
+4) Folder: `/docs`
+
+Your site will be:
+
+```
+https://<username>.github.io/<repo>/
 ```
 
 ## How summaries are generated
@@ -54,7 +69,7 @@ Note: a small number of sources may be unavailable (404/410/blocked), so those e
 
 ## Project structure
 
-- `ui/` - static UI (HTML/CSS/JS) and data bundle
+- `docs/` - static UI (HTML/CSS/JS) and data bundle
 - `tools/` - summarizer for fetching + LLM summarization
 - `sources/` and `sources_text/` - cached article text (ignored by git)
 

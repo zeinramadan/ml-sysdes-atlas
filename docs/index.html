@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ML System Design Atlas</title>
+    <link rel="stylesheet" href="styles.css?v=12">
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="app">
+      <header class="header">
+        <div class="title-block">
+          <div class="eyebrow">Local explorer</div>
+          <h1>ML System Design Atlas</h1>
+          <p>Explore 309 real world case studies grouped by system type. Filter by industry, year, and infrastructure components.</p>
+        </div>
+        <div class="search-block">
+          <div class="search-row">
+            <input id="search" type="search" placeholder="Search company, title, or problem">
+            <button id="clearSearch" class="ghost" type="button">Clear</button>
+          </div>
+          <div class="summary" id="summary"></div>
+          <div class="controls">
+            <label class="toggle">
+              <input id="onlyInfra" type="checkbox">
+              <span>Only with infra details</span>
+            </label>
+            <label class="toggle">
+              <input id="onlySource" type="checkbox">
+              <span>Only with source available</span>
+            </label>
+            <label class="select">
+              <span>Sort</span>
+              <select id="sort">
+                <option value="year_desc">Year desc</option>
+                <option value="year_asc">Year asc</option>
+                <option value="company_asc">Company A-Z</option>
+              </select>
+            </label>
+            <button id="clearFilters" class="ghost" type="button">Reset filters</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="panel">
+            <h2>Inspiration</h2>
+            <div class="intent-block">
+              <label for="intentInput">Describe what you are trying to build</label>
+              <div class="search-row">
+                <input id="intentInput" type="search" placeholder="Example: real-time fraud detection for card payments">
+                <button id="clearIntent" class="ghost" type="button">Clear</button>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <h2>System types</h2>
+            <div class="group-actions">
+              <button id="selectAllGroups" class="ghost" type="button">Select all</button>
+              <button id="clearGroups" class="ghost" type="button">Clear</button>
+            </div>
+            <div class="group-hint">Click to toggle. Cmd/Ctrl-click also works.</div>
+            <div id="groupList" class="group-list"></div>
+          </div>
+          <div class="panel">
+            <h2>Filters</h2>
+            <div class="filter-block">
+              <h3>Industry</h3>
+              <div id="industryFilters" class="chip-grid"></div>
+            </div>
+            <div class="filter-block">
+              <h3>Year</h3>
+              <div id="yearFilters" class="chip-grid"></div>
+            </div>
+            <div class="filter-block">
+              <h3>Infrastructure</h3>
+              <div class="filter-row">
+                <input id="componentSearch" type="search" placeholder="Find component">
+              </div>
+              <div id="componentFilters" class="chip-grid"></div>
+            </div>
+          </div>
+        </aside>
+
+        <main class="content">
+          <section id="intentSection" class="suggestions hidden">
+            <div class="suggestions-header">
+              <h2>Suggested systems</h2>
+              <div id="intentMeta" class="suggestions-meta"></div>
+            </div>
+            <div id="intentResults" class="suggestions-grid"></div>
+          </section>
+          <div id="results" class="results"></div>
+          <div id="empty" class="empty hidden">
+            <h2>No matches</h2>
+            <p>Try clearing filters or changing the search terms.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <noscript>
+      <div class="noscript">This page needs JavaScript to load the dataset.</div>
+    </noscript>
+
+    <script src="data.js?v=13"></script>
+    <script src="app.js?v=13"></script>
+  </body>
+</html>

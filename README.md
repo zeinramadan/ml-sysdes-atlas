@@ -67,10 +67,75 @@ Note: a small number of sources may be unavailable (404/410/blocked), so those e
 - Keyword search
 - "Describe what you are trying to build" suggestions
 
+## MCP server
+
+This repo includes a local Model Context Protocol (MCP) server so MCP-compatible clients/models can query the atlas as a historical reference for ML product techniques.
+
+Run with Docker:
+
+```bash
+docker build -t ml-system-design-atlas-mcp .
+docker run --rm -i ml-system-design-atlas-mcp
+```
+
+Example MCP client config using Docker:
+
+```json
+{
+  "mcpServers": {
+    "ml-system-design-atlas": {
+      "command": "docker",
+      "args": ["run", "--rm", "-i", "ml-system-design-atlas-mcp"]
+    }
+  }
+}
+```
+
+The `-i` flag is important because MCP uses stdin/stdout for this server.
+
+## Pi harness
+
+This project also includes a project-local pi extension at `.pi/extensions/ml-atlas-harness.ts`. Pi auto-discovers it when you start pi from this repo.
+
+The harness registers Docker-backed tools for the model:
+
+- `atlas_search_case_studies`
+- `atlas_get_case_study`
+- `atlas_recommend_techniques`
+- `atlas_list_facets`
+
+Before using pi, build the Docker image:
+
+```bash
+docker build -t ml-system-design-atlas-mcp .
+pi
+```
+
+Optional: override the Docker image name used by the pi harness:
+
+```bash
+ML_ATLAS_MCP_IMAGE=my-image-name pi
+```
+
+You can still run it directly with Python if desired:
+
+```bash
+python3 -m pip install -r requirements-mcp.txt
+python3 tools/ml_atlas_mcp.py
+```
+
+Exposed tools:
+
+- `search_case_studies` - search by product goal, architecture, category, industry, and year
+- `get_case_study` - fetch full details for a specific case study
+- `recommend_techniques` - find analogous systems and extract reusable ML product design techniques
+- `list_atlas_facets` - list available categories, industries, years, and counts
+
 ## Project structure
 
 - `docs/` - static UI (HTML/CSS/JS) and data bundle
-- `tools/` - summarizer for fetching + LLM summarization
+- `.pi/extensions/ml-atlas-harness.ts` - project-local pi harness exposing Docker-backed atlas tools
+- `tools/` - summarizer for fetching + LLM summarization, plus `ml_atlas_mcp.py` MCP server
 - `sources/` and `sources_text/` - cached article text (ignored by git)
 
 ## Credits

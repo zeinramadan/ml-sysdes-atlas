@@ -1,0 +1,10 @@
+.git
+.env
+.DS_Store
+__pycache__/
+*.pyc
+sources/
+sources_text/
+extracted.json
+flashnotes.md
+case_studies.json
